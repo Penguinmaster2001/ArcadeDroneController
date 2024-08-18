@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://b4c7v8e06euaw"]
+
+[ext_resource type="ArrayMesh" uid="uid://cwr8s30da5gk8" path="res://Drone.obj" id="1_yscab"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8gb71"]
+size = Vector3(0.2, 0.0361133, 0.2)
+
+[node name="Drone" type="RigidBody3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_yscab")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00281379, 0)
+shape = SubResource("BoxShape3D_8gb71")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.08, 0.1)
