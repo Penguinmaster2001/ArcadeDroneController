@@ -1,12 +1,25 @@
 extends Node3D
 
-@export var cameras : Array
+var cameras : Array
 
-@export var camera : int
+var camera : int
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	
+	find_cameras(self)
+	
+	cameras[camera].make_current()
+	
+	
+
+
+func find_cameras(node):
+	if node is Camera3D:
+		cameras.append(node)
+	
+	for child in node.get_children():
+		find_cameras(child)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -23,4 +36,4 @@ func _unhandled_input(event):
 	if event.is_pressed() and event.keycode == KEY_V:
 		camera = (camera + 1) % len(cameras)
 		
-		get_node(cameras[camera]).make_current()
+		cameras[camera].make_current()

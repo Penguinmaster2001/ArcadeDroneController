@@ -1,26 +1,39 @@
-[gd_scene load_steps=5 format=3 uid="uid://dxfexw7vywjap"]
+[gd_scene load_steps=6 format=3 uid="uid://dxfexw7vywjap"]
 
 [ext_resource type="Script" path="res://World.gd" id="1_4jo14"]
 [ext_resource type="PackedScene" uid="uid://cryevp3edhq1p" path="res://Ground.tscn" id="1_4l42u"]
 [ext_resource type="PackedScene" uid="uid://b4c7v8e06euaw" path="res://Drone.tscn" id="1_4rnn3"]
 [ext_resource type="Script" path="res://TrackDrone.gd" id="3_wyqu4"]
+[ext_resource type="PackedScene" uid="uid://b0ykwagqcsn6g" path="res://RaceUI.tscn" id="5_yo3c4"]
 
 [node name="World" type="Node3D"]
 script = ExtResource("1_4jo14")
-cameras = [NodePath("WatchCamera"), NodePath("Drone/Camera3D")]
 
-[node name="Drone" parent="." instance=ExtResource("1_4rnn3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.409342, 0)
+[node name="Drone" parent="." node_paths=PackedStringArray("throttleUI") instance=ExtResource("1_4rnn3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21, 1, 21)
+linear_damp = 0.1
+maxRoll = 90.0
+rollAuthority = 10.0
+maxPitch = 90.0
+pitchAuthority = 10.0
+yawAuthority = 10.0
+yawSpeed = 15.0
+motorPower = 15.0
+throttleUI = NodePath("../Control/Throttle")
 
 [node name="Ground" parent="." instance=ExtResource("1_4l42u")]
 
 [node name="WatchCamera" type="Camera3D" parent="." node_paths=PackedStringArray("drone")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 21, 1.6, 21)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23, 1.6, 23)
 script = ExtResource("3_wyqu4")
-drone = NodePath("../Drone")
+drone = NodePath("../Ground")
 track_speed = 0.2
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.624861, 0.603966, -0.494746, 0, 0.633691, 0.773586, 0.780736, -0.483384, 0.395969, 0, 0, 0)
+light_color = Color(0.91, 0.9445, 1, 1)
+light_energy = 0.1
 
-[editable path="Drone"]
+[node name="Control" parent="." instance=ExtResource("5_yo3c4")]
+
+[editable path="Control"]

@@ -1,18 +1,40 @@
-[gd_scene load_steps=3 format=3 uid="uid://b4c7v8e06euaw"]
+[gd_scene load_steps=4 format=3 uid="uid://b4c7v8e06euaw"]
 
+[ext_resource type="Script" path="res://Drone.cs" id="1_jtcd5"]
 [ext_resource type="ArrayMesh" uid="uid://cwr8s30da5gk8" path="res://Drone.obj" id="1_yscab"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8gb71"]
-size = Vector3(0.2, 0.0361133, 0.2)
+size = Vector3(0.2, 0.0424707, 0.2)
 
 [node name="Drone" type="RigidBody3D"]
+linear_damp = 0.035
+angular_damp = 1.688
+script = ExtResource("1_jtcd5")
+maxRoll = 60.0
+rollAuthority = 15.0
+maxPitch = 60.0
+pitchAuthority = 15.0
+yawAuthority = 15.0
+maxVerticalSpeed = 5.0
+motorPower = 20.0
+
+[node name="LightFront" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.01, 0.1)
+
+[node name="LightLeft" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0, -0.1)
+light_color = Color(0.907053, 0.299607, 0, 1)
+
+[node name="LightRight" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.1, 0, -0.1)
+light_color = Color(0.118938, 0.646379, 5.77569e-07, 1)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = ExtResource("1_yscab")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00281379, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0059925, 0)
 shape = SubResource("BoxShape3D_8gb71")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.08, 0.1)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.08, -0.1)

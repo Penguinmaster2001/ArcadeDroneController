@@ -1,10 +1,25 @@
-[gd_scene load_steps=4 format=3 uid="uid://cryevp3edhq1p"]
+[gd_scene load_steps=7 format=3 uid="uid://cryevp3edhq1p"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_siogs"]
-size = Vector2(50, 50)
+size = Vector2(1000, 1000)
+
+[sub_resource type="Gradient" id="Gradient_rslir"]
+colors = PackedColorArray(0.299547, 0.299547, 0.299547, 1, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_a8ajo"]
+noise_type = 5
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_kty2r"]
+width = 1024
+height = 1024
+seamless = true
+color_ramp = SubResource("Gradient_rslir")
+noise = SubResource("FastNoiseLite_a8ajo")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ljf2x"]
 albedo_color = Color(0.368584, 0.440935, 0.266813, 1)
+albedo_texture = SubResource("NoiseTexture2D_kty2r")
+uv1_scale = Vector3(10, 10, 10)
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_ghv3w"]
 
